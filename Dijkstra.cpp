@@ -3,7 +3,7 @@
 	Code by jahanaraco
 	Single Source Shortest Path
 	Dijkstras algorithm for Weighted Graphs
-	O(N lg E)
+	O(E lg N)
 */
 
 #include <iostream>
