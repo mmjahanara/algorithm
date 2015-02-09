@@ -12,10 +12,13 @@
 
 using namespace std;
 
-const int MAXN = 1000;
+const int MAXN = 1000 * 100;
 int n, m, source, dist[MAXN];
 vector<pair<int, int> > adj[MAXN];
 set<pair<int, int> > S; // Set of candidates vertices
+
+int parent[MAXN]; // "parent[i] = v" means v is last vertex updated i 
+void print_path(int v);
 
 int main(){
 	cin >> n >> m >> source; 
@@ -43,12 +46,30 @@ int main(){
 					S.erase(make_pair(dist[u], u));
 				dist[u] = dist[v] + w;
 				S.insert(make_pair(dist[u], u));
+				parent[u] = v; // note this line
 			}
 		}
 	}	
+	
+	/* 	// print shortest path for every i
+		for(int i = 1; i <= n; i++){
+			if(dist[i] != -1){
+				print_path(i);
+				cout << endl;
+			}
+			else
+				cout << -1 << endl;
+		}
+	*/
 	
 	for(int i = 1; i <= n; i++)
 		cout << dist[i] << ' ' ;
 	cout << endl;
 	return 0;
+}
+
+void print_path(int v){
+	if(parent[v] != 0)
+		print_path(parent[v]);
+	cout << v << ' ';
 }
